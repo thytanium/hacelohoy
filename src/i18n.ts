@@ -8,6 +8,7 @@ const resources = {
       "To-do list": "Lista de to-dos",
       Done: "Listo",
       Undo: "Deshacer",
+      "Add a new to-do": "Agregar un nuevo to-do",
     },
   },
 };

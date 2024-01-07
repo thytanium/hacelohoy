@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 interface TodoCreateProps {
   onTodoCreate: (todo: Todo) => void;
@@ -16,6 +17,7 @@ interface TodoCreateProps {
 export default function TodoCreate({ onTodoCreate }: TodoCreateProps) {
   const [todoText, setTodoText] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const { t } = useTranslation();
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => setTodoText(e.target.value),
@@ -40,8 +42,9 @@ export default function TodoCreate({ onTodoCreate }: TodoCreateProps) {
   return (
     <form onSubmit={onSubmit}>
       <input
-        className="w-full rounded bg-gray-100 px-2 py-1"
+        className="w-full rounded bg-gray-100 px-2 py-1 text-2xl"
         onChange={onChange}
+        placeholder={t("Add a new to-do")}
         ref={inputRef}
         type="text"
         value={todoText}

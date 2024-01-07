@@ -2,6 +2,8 @@ import { CheckCircle, Circle, Trash2 } from "react-feather";
 import { Todo, TodoCreateCallback } from "../../models/Todo";
 import TodoCreate from "./TodoCreate";
 import { useTranslation } from "react-i18next";
+import ProgressBar from "../progress-bar/ProgressBar";
+import { useMemo } from "react";
 
 interface TodoListProps {
   items: Todo[];
@@ -17,10 +19,18 @@ export default function TodoList({
   onTodoDelete,
 }: TodoListProps) {
   const { t } = useTranslation();
+
+  const completed = useMemo(() => items.filter((todo) => todo.done), [items]);
+
+  const progressRatio = useMemo(
+    () => (items.length > 0 ? completed.length / items.length : 0),
+    [completed, items],
+  );
+
   return (
     <section>
       <h1>{t("To-do list")}</h1>
-      <TodoCreate onTodoCreate={onTodoCreate} />
+      <ProgressBar value={Math.round(progressRatio * 100)} />
       {items.map((todo) => (
         <article key={todo.id} className="flex items-baseline">
           <div className="flex flex-1 items-center space-x-4">
@@ -56,6 +66,7 @@ export default function TodoList({
           </button>
         </article>
       ))}
+      <TodoCreate onTodoCreate={onTodoCreate} />
     </section>
   );
 }

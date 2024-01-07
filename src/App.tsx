@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { useLocalStorage } from "@uidotdev/usehooks";
-import "./App.css";
 import TodoList from "./components/todo-list/TodoList";
 import { Todo, TodoCreateCallback } from "./models/Todo";
 import LngSwitch from "./components/lng-switch/LngSwitch";
@@ -10,25 +9,27 @@ function App() {
 
   const onTodoCreate = useCallback<TodoCreateCallback>(
     (todo: Todo) => setTodoList((currentTodos) => [...currentTodos, todo]),
-    [setTodoList]
+    [setTodoList],
   );
 
   const onTodoUpdate = useCallback<TodoCreateCallback>(
     (todo: Todo) =>
       setTodoList((currentTodos) =>
         currentTodos.map((currentTodo) =>
-          currentTodo.id === todo.id ? { ...currentTodo, ...todo } : currentTodo
-        )
+          currentTodo.id === todo.id
+            ? { ...currentTodo, ...todo }
+            : currentTodo,
+        ),
       ),
-    [setTodoList]
+    [setTodoList],
   );
 
   const onTodoDelete = useCallback(
     (todo: Todo) =>
       setTodoList((currentTodos) =>
-        currentTodos.filter(({ id }) => id !== todo.id)
+        currentTodos.filter(({ id }) => id !== todo.id),
       ),
-    [setTodoList]
+    [setTodoList],
   );
 
   return (
