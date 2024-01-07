@@ -19,7 +19,7 @@ export default function TodoCreate({ onTodoCreate }: TodoCreateProps) {
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => setTodoText(e.target.value),
-    []
+    [],
   );
 
   const onSubmit = useCallback(
@@ -28,7 +28,7 @@ export default function TodoCreate({ onTodoCreate }: TodoCreateProps) {
       onTodoCreate({ id: uuidv4(), text: todoText, done: false });
       setTodoText("");
     },
-    [onTodoCreate, todoText]
+    [onTodoCreate, todoText],
   );
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function TodoCreate({ onTodoCreate }: TodoCreateProps) {
   return (
     <form onSubmit={onSubmit}>
       <input
-        className="px-2 py-1 bg-gray-100 rounded w-full"
+        className="w-full rounded bg-gray-100 px-2 py-1"
         onChange={onChange}
         ref={inputRef}
         type="text"

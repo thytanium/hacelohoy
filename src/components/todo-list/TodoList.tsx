@@ -23,13 +23,13 @@ export default function TodoList({
       <TodoCreate onTodoCreate={onTodoCreate} />
       {items.map((todo) => (
         <article key={todo.id} className="flex items-baseline">
-          <div className="flex-1 flex space-x-4 items-center">
+          <div className="flex flex-1 items-center space-x-4">
             {todo.done ? (
               <CheckCircle className="text-green-500" />
             ) : (
               <Circle className="text-gray-200" />
             )}
-            <div className="text-2xl font-light flex-1">
+            <div className="flex-1 text-2xl font-light">
               {todo.done ? (
                 <span className="line-through">{todo.text}</span>
               ) : (
