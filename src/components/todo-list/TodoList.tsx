@@ -4,8 +4,10 @@ import TodoCreate from "./TodoCreate";
 import { useTranslation } from "react-i18next";
 import ProgressBar from "../progress-bar/ProgressBar";
 import { useMemo } from "react";
+import TodoDatePicker from "../todo-date-picker/TodoDatePicker";
 
 interface TodoListProps {
+  date: Date;
   items: Todo[];
   onTodoUpdate: TodoCreateCallback;
   onTodoCreate: TodoCreateCallback;
@@ -13,6 +15,7 @@ interface TodoListProps {
 }
 
 export default function TodoList({
+  date,
   items,
   onTodoUpdate,
   onTodoCreate,
@@ -29,11 +32,11 @@ export default function TodoList({
 
   return (
     <section>
-      <h1>{t("To-do list")}</h1>
+      <TodoDatePicker date={date} />
       <ProgressBar value={Math.round(progressRatio * 100)} />
       {items.map((todo) => (
         <article key={todo.id} className="flex items-baseline">
-          <div className="flex flex-1 items-center space-x-4">
+          <div className="flex flex-1 items-center">
             {todo.done ? (
               <CheckCircle className="text-green-500" />
             ) : (
