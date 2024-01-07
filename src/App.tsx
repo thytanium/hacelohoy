@@ -1,14 +1,15 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
 import "./App.css";
 import TodoList from "./components/todo-list/TodoList";
 import { Todo, TodoCreateCallback } from "./models/Todo";
 
 function App() {
-  const [todoList, setTodoList] = useState<Todo[]>([]);
+  const [todoList, setTodoList] = useLocalStorage<Todo[]>("todos", []);
 
   const onTodoCreate = useCallback<TodoCreateCallback>(
     (todo: Todo) => setTodoList((currentTodos) => [...currentTodos, todo]),
-    []
+    [setTodoList]
   );
 
   const onTodoUpdate = useCallback<TodoCreateCallback>(
@@ -18,7 +19,15 @@ function App() {
           currentTodo.id === todo.id ? { ...currentTodo, ...todo } : currentTodo
         )
       ),
-    []
+    [setTodoList]
+  );
+
+  const onTodoDelete = useCallback(
+    (todo: Todo) =>
+      setTodoList((currentTodos) =>
+        currentTodos.filter(({ id }) => id !== todo.id)
+      ),
+    [setTodoList]
   );
 
   return (
@@ -27,6 +36,7 @@ function App() {
         items={todoList}
         onTodoCreate={onTodoCreate}
         onTodoUpdate={onTodoUpdate}
+        onTodoDelete={onTodoDelete}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import { CheckCircle, Circle } from "react-feather";
+import { CheckCircle, Circle, Trash2 } from "react-feather";
 import { Todo, TodoCreateCallback } from "../../models/Todo";
 import TodoCreate from "./TodoCreate";
 
@@ -6,12 +6,14 @@ interface TodoListProps {
   items: Todo[];
   onTodoUpdate: TodoCreateCallback;
   onTodoCreate: TodoCreateCallback;
+  onTodoDelete: TodoCreateCallback;
 }
 
 export default function TodoList({
   items,
   onTodoUpdate,
   onTodoCreate,
+  onTodoDelete,
 }: TodoListProps) {
   return (
     <section>
@@ -25,7 +27,7 @@ export default function TodoList({
             ) : (
               <Circle className="text-gray-200" />
             )}
-            <div className="text-2xl font-light flex-1 px-1">
+            <div className="text-2xl font-light flex-1">
               {todo.done ? (
                 <span className="line-through">{todo.text}</span>
               ) : (
@@ -39,14 +41,17 @@ export default function TodoList({
               )}
             </div>
           </div>
-          {!todo.done && (
-            <button
-              type="button"
-              onClick={() => onTodoUpdate({ ...todo, done: true })}
-            >
-              Done
-            </button>
-          )}
+
+          <button
+            type="button"
+            onClick={() => onTodoUpdate({ ...todo, done: !todo.done })}
+          >
+            {todo.done ? "Undo" : "Done"}
+          </button>
+
+          <button type="button" onClick={() => onTodoDelete(todo)}>
+            <Trash2 className="text-pink-500" />
+          </button>
         </article>
       ))}
     </section>
