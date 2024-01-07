@@ -1,6 +1,7 @@
 import { CheckCircle, Circle, Trash2 } from "react-feather";
 import { Todo, TodoCreateCallback } from "../../models/Todo";
 import TodoCreate from "./TodoCreate";
+import { useTranslation } from "react-i18next";
 
 interface TodoListProps {
   items: Todo[];
@@ -15,9 +16,10 @@ export default function TodoList({
   onTodoCreate,
   onTodoDelete,
 }: TodoListProps) {
+  const { t } = useTranslation();
   return (
     <section>
-      <h1>To-do list</h1>
+      <h1>{t("To-do list")}</h1>
       <TodoCreate onTodoCreate={onTodoCreate} />
       {items.map((todo) => (
         <article key={todo.id} className="flex items-baseline">
@@ -46,7 +48,7 @@ export default function TodoList({
             type="button"
             onClick={() => onTodoUpdate({ ...todo, done: !todo.done })}
           >
-            {todo.done ? "Undo" : "Done"}
+            {t(todo.done ? "Undo" : "Done")}
           </button>
 
           <button type="button" onClick={() => onTodoDelete(todo)}>

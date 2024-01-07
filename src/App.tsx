@@ -3,6 +3,7 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import "./App.css";
 import TodoList from "./components/todo-list/TodoList";
 import { Todo, TodoCreateCallback } from "./models/Todo";
+import LngSwitch from "./components/lng-switch/LngSwitch";
 
 function App() {
   const [todoList, setTodoList] = useLocalStorage<Todo[]>("todos", []);
@@ -31,14 +32,17 @@ function App() {
   );
 
   return (
-    <div className="container mx-auto p-16">
-      <TodoList
-        items={todoList}
-        onTodoCreate={onTodoCreate}
-        onTodoUpdate={onTodoUpdate}
-        onTodoDelete={onTodoDelete}
-      />
-    </div>
+    <>
+      <div className="container mx-auto p-16">
+        <TodoList
+          items={todoList}
+          onTodoCreate={onTodoCreate}
+          onTodoUpdate={onTodoUpdate}
+          onTodoDelete={onTodoDelete}
+        />
+      </div>
+      <LngSwitch />
+    </>
   );
 }
 
