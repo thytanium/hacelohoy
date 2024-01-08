@@ -59,7 +59,7 @@ export default function TodoList({
                 {todo.done ? (
                   <CheckCircle className="text-green-500 hover:text-green-600" />
                 ) : (
-                  <Circle className="text-gray-200 hover:text-gray-300 dark:text-gray-600" />
+                  <Circle className="text-gray-300 hover:text-gray-700 dark:text-gray-600 dark:hover:text-gray-100" />
                 )}
               </button>
               <div className="flex-1 font-light lg:text-xl xl:text-2xl">

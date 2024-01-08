@@ -4,6 +4,7 @@ import TodoList from "./components/todo-list/TodoList";
 import type { Todo, TodoCreateCallback, TodoDb } from "./models/Todo";
 import LngSwitch from "./components/lng-switch/LngSwitch";
 import { serializeDate } from "./utils/serializeDate";
+import DarkModeToggle from "./components/dark-mode-toggle/DarkModeToggle";
 
 function App() {
   const currentDate = useMemo(() => new Date(), []);
@@ -49,6 +50,7 @@ function App() {
 
   return (
     <>
+      <DarkModeToggle />
       <div className="container mx-auto p-4">
         <TodoList
           date={currentDate}

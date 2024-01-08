@@ -6,7 +6,7 @@ interface ProgressBarProps {
 export default function ProgressBar({ height = 16, value }: ProgressBarProps) {
   return (
     <div
-      className="w-full rounded bg-gray-200 dark:bg-gray-700"
+      className="w-full rounded bg-gray-200 dark:bg-gray-800"
       style={{ height }}
     >
       <div
