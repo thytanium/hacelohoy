@@ -5,7 +5,10 @@ interface ProgressBarProps {
 
 export default function ProgressBar({ height = 16, value }: ProgressBarProps) {
   return (
-    <div className="w-full rounded bg-gray-200" style={{ height }}>
+    <div
+      className="w-full rounded bg-gray-200 dark:bg-gray-700"
+      style={{ height }}
+    >
       <div
         className="h-full rounded bg-green-500"
         style={{

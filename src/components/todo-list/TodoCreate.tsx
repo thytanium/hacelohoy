@@ -42,7 +42,7 @@ export default function TodoCreate({ onTodoCreate }: TodoCreateProps) {
   return (
     <form onSubmit={onSubmit}>
       <input
-        className="w-full rounded bg-gray-100 px-2 py-1 text-2xl"
+        className="w-full rounded bg-gray-100 px-2 py-1 text-2xl dark:bg-gray-700"
         onChange={onChange}
         placeholder={t("Add a new to-do")}
         ref={inputRef}

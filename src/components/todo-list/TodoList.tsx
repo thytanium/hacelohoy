@@ -47,7 +47,7 @@ export default function TodoList({
                 <span className="line-through">{todo.text}</span>
               ) : (
                 <input
-                  className="w-full"
+                  className="w-full bg-transparent"
                   onChange={(event) =>
                     onTodoUpdate({ ...todo, text: event.target.value })
                   }
