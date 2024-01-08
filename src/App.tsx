@@ -49,7 +49,7 @@ function App() {
 
   return (
     <>
-      <div className="container mx-auto p-16">
+      <div className="container mx-auto p-4">
         <TodoList
           date={currentDate}
           items={todoList[currentDateKey] ?? []}

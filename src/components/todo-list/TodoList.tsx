@@ -35,13 +35,19 @@ export default function TodoList({
       <TodoDatePicker date={date} />
       <ProgressBar value={Math.round(progressRatio * 100)} />
       {items.map((todo) => (
-        <article key={todo.id} className="flex items-baseline">
-          <div className="flex flex-1 items-center">
-            {todo.done ? (
-              <CheckCircle className="text-green-500" />
-            ) : (
-              <Circle className="text-gray-200" />
-            )}
+        <article key={todo.id} className="flex items-baseline space-x-2 py-1">
+          <div className="flex flex-1 items-center space-x-2">
+            <button
+              type="button"
+              aria-label={t(todo.done ? "Undo" : "Done")}
+              onClick={() => onTodoUpdate({ ...todo, done: !todo.done })}
+            >
+              {todo.done ? (
+                <CheckCircle className="text-green-500" />
+              ) : (
+                <Circle className="text-gray-200" />
+              )}
+            </button>
             <div className="flex-1 text-2xl font-light">
               {todo.done ? (
                 <span className="line-through">{todo.text}</span>
@@ -57,14 +63,12 @@ export default function TodoList({
             </div>
           </div>
 
+          {/* delete button */}
           <button
             type="button"
-            onClick={() => onTodoUpdate({ ...todo, done: !todo.done })}
+            className="rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-800"
+            onClick={() => onTodoDelete(todo)}
           >
-            {t(todo.done ? "Undo" : "Done")}
-          </button>
-
-          <button type="button" onClick={() => onTodoDelete(todo)}>
             <Trash2 className="text-pink-500" />
           </button>
         </article>
