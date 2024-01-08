@@ -36,7 +36,10 @@ export default function TodoList({
       <ProgressBar value={Math.round(progressRatio * 100)} />
       <div>
         {items.map((todo) => (
-          <article key={todo.id} className="flex items-baseline space-x-2 py-1">
+          <article
+            key={todo.id}
+            className="flex items-baseline space-x-2 py-1 even:bg-gray-100 dark:even:bg-gray-800"
+          >
             <div className="flex flex-1 items-center space-x-2">
               <button
                 type="button"
@@ -44,9 +47,9 @@ export default function TodoList({
                 onClick={() => onTodoUpdate({ ...todo, done: !todo.done })}
               >
                 {todo.done ? (
-                  <CheckCircle className="text-green-500" />
+                  <CheckCircle className="text-green-500 hover:text-green-600" />
                 ) : (
-                  <Circle className="text-gray-200" />
+                  <Circle className="text-gray-200 hover:text-gray-300 dark:text-gray-600" />
                 )}
               </button>
               <div className="flex-1 text-2xl font-light">
