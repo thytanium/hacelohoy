@@ -31,48 +31,50 @@ export default function TodoList({
   );
 
   return (
-    <section>
+    <section className="space-y-4">
       <TodoDatePicker date={date} />
       <ProgressBar value={Math.round(progressRatio * 100)} />
-      {items.map((todo) => (
-        <article key={todo.id} className="flex items-baseline space-x-2 py-1">
-          <div className="flex flex-1 items-center space-x-2">
+      <div>
+        {items.map((todo) => (
+          <article key={todo.id} className="flex items-baseline space-x-2 py-1">
+            <div className="flex flex-1 items-center space-x-2">
+              <button
+                type="button"
+                aria-label={t(todo.done ? "Undo" : "Done")}
+                onClick={() => onTodoUpdate({ ...todo, done: !todo.done })}
+              >
+                {todo.done ? (
+                  <CheckCircle className="text-green-500" />
+                ) : (
+                  <Circle className="text-gray-200" />
+                )}
+              </button>
+              <div className="flex-1 text-2xl font-light">
+                {todo.done ? (
+                  <span className="line-through">{todo.text}</span>
+                ) : (
+                  <input
+                    className="w-full bg-transparent"
+                    onChange={(event) =>
+                      onTodoUpdate({ ...todo, text: event.target.value })
+                    }
+                    value={todo.text}
+                  />
+                )}
+              </div>
+            </div>
+
+            {/* delete button */}
             <button
               type="button"
-              aria-label={t(todo.done ? "Undo" : "Done")}
-              onClick={() => onTodoUpdate({ ...todo, done: !todo.done })}
+              className="rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-800"
+              onClick={() => onTodoDelete(todo)}
             >
-              {todo.done ? (
-                <CheckCircle className="text-green-500" />
-              ) : (
-                <Circle className="text-gray-200" />
-              )}
+              <Trash2 className="text-pink-500" />
             </button>
-            <div className="flex-1 text-2xl font-light">
-              {todo.done ? (
-                <span className="line-through">{todo.text}</span>
-              ) : (
-                <input
-                  className="w-full bg-transparent"
-                  onChange={(event) =>
-                    onTodoUpdate({ ...todo, text: event.target.value })
-                  }
-                  value={todo.text}
-                />
-              )}
-            </div>
-          </div>
-
-          {/* delete button */}
-          <button
-            type="button"
-            className="rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-800"
-            onClick={() => onTodoDelete(todo)}
-          >
-            <Trash2 className="text-pink-500" />
-          </button>
-        </article>
-      ))}
+          </article>
+        ))}
+      </div>
       <TodoCreate onTodoCreate={onTodoCreate} />
     </section>
   );
