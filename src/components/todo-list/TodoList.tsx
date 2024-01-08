@@ -52,7 +52,7 @@ export default function TodoList({
                   <Circle className="text-gray-200 hover:text-gray-300 dark:text-gray-600" />
                 )}
               </button>
-              <div className="flex-1 text-2xl font-light">
+              <div className="flex-1 font-light lg:text-xl xl:text-2xl">
                 {todo.done ? (
                   <span className="line-through">{todo.text}</span>
                 ) : (
