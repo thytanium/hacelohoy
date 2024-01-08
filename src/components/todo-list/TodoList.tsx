@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import ProgressBar from "../progress-bar/ProgressBar";
 import { useMemo } from "react";
 import TodoDatePicker from "../todo-date-picker/TodoDatePicker";
+import TodoStats from "./TodoStats";
 
 interface TodoListProps {
   date: Date;
@@ -33,7 +34,16 @@ export default function TodoList({
   return (
     <section className="space-y-4">
       <TodoDatePicker date={date} />
-      <ProgressBar value={Math.round(progressRatio * 100)} />
+      <div className="flex space-x-2">
+        <div className="flex-1">
+          <ProgressBar height={20} value={Math.round(progressRatio * 100)} />
+        </div>
+        <TodoStats
+          completedCount={completed.length}
+          completedRatio={progressRatio}
+          todoCount={items.length}
+        />
+      </div>
       <div>
         {items.map((todo) => (
           <article
@@ -70,7 +80,7 @@ export default function TodoList({
             {/* delete button */}
             <button
               type="button"
-              className="rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="rounded p-1 hover:bg-gray-100 dark:hover:bg-black"
               onClick={() => onTodoDelete(todo)}
             >
               <Trash2 className="text-pink-500" />
